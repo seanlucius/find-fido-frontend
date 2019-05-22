@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h4 {
+  text-align: left;
+  text-decoration: underline;
+}
+
+.marker {
+  background-image: url("./images/lostpaw.png");
+  background-size: cover;
+  width: 43px;
+  height: 59px;
+  border-radius: 0%;
+  cursor: pointer;
+}
