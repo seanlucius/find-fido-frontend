@@ -24,7 +24,7 @@ class HomePage extends React.Component {
       this.props.loading === true &&
       this.state.searched
     ) {
-      window.alert("Invalid ZIP CODE");
+      window.alert("Invalid ZIP code!");
       this.setState({
         searchedAddress: "",
         searched: false
@@ -49,7 +49,7 @@ class HomePage extends React.Component {
         searched: true
       });
     } else {
-      window.alert("It says ZIP code dumbass");
+      window.alert("That ain't a ZIP code");
       this.setState({
         searchedAddress: ""
       });

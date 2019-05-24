@@ -18,6 +18,8 @@ const loadingReducer = (oldState = false, action) => {
       return false;
     case RESET_FAIL:
       return false;
+    case POST_LOST_PET:
+      return false;
     default:
       return oldState;
   }
@@ -38,6 +40,8 @@ const mapCenterReducer = (oldState = [39.023805, -77.094242], action) => {
   switch (action.type) {
     case FETCHED_MAP_CENTER:
       return action.payload;
+    case POST_LOST_PET:
+      return [action.payload.latitude, action.payload.longitude];
     default:
       return oldState;
   }

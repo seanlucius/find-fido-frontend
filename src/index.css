@@ -25,3 +25,12 @@ h4 {
   border-radius: 0%;
   cursor: pointer;
 }
+
+.poster {
+  text-align: center;
+}
+
+.postername {
+  text-decoration: underline;
+  font-weight: bold;
+}

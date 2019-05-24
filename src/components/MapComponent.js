@@ -1,7 +1,6 @@
 import React from "react";
 import ReactMapGL, { GeolocateControl, Marker, Popup } from "react-map-gl";
 import { connect } from "react-redux";
-import { Modal } from "semantic-ui-react";
 
 class MapComponent extends React.Component {
   state = {
@@ -10,7 +9,7 @@ class MapComponent extends React.Component {
       height: 400,
       latitude: this.props.mapCenter[0],
       longitude: this.props.mapCenter[1],
-      zoom: 15
+      zoom: 12
     },
     popUpInfo: null
   };
@@ -21,6 +20,7 @@ class MapComponent extends React.Component {
     return (
       popUpInfo && (
         <Popup
+          className="poster"
           tipSize={5}
           offsetLeft={20}
           offsetTop={10}
@@ -29,8 +29,12 @@ class MapComponent extends React.Component {
           closeOnClick={false}
           onClose={() => this.setState({ popUpInfo: null })}
         >
-          <div>{popUpInfo.name}</div>
-          <p>{popUpInfo.instructions}</p>
+          <div className="postername">{popUpInfo.name}</div>
+          <img src={popUpInfo.picture} height="80px" alt="pet" />
+          <p>Breed: {popUpInfo.breed}</p>
+          <p>Age: {popUpInfo.age}</p>
+          <p>Color: {popUpInfo.color}</p>
+          <button>Conact Owner</button>
         </Popup>
       )
     );

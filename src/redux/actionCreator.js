@@ -39,16 +39,19 @@ function gettingLostPetPosition(petObj) {
   let streetQuery = streetNum + exceptStreetNum;
 
   return dispatch => {
+    dispatch(loadingPetSubmit());
     fetch(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${streetQuery}%2C${
         petObj.city
       }%2C${
         petObj.state
-      }.json?limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA`
+      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA`
     )
       .then(resp => resp.json())
       .then(d => {
-        dispatch(submittingLostPetForm(petObj, d.features[0].center));
+        d.features.length === 0
+          ? dispatch(didNotFetch())
+          : dispatch(submittingLostPetForm(petObj, d.features[0].center));
       });
   };
 }
@@ -62,6 +65,7 @@ function submittingLostPetForm(petObj, coord) {
     longitude: long
   };
   return dispatch => {
+    dispatch(loadingPetSubmit());
     fetch(URL, {
       method: "POST",
       headers: {

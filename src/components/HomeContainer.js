@@ -6,11 +6,16 @@ class HomeContainer extends React.Component {
   render() {
     return (
       <Grid celled>
-        <Grid.Column width={3} />
-        <Grid.Column width={10}>
-          <MapComponent />
-        </Grid.Column>
-        <Grid.Column width={3} />
+        <Grid.Row style={{ "justify-content": "center" }}>
+          <h1>Local Map</h1>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={3} />
+          <Grid.Column width={10}>
+            <MapComponent />
+          </Grid.Column>
+          <Grid.Column width={3} />
+        </Grid.Row>
       </Grid>
     );
   }
