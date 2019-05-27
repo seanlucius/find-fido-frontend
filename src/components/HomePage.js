@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { NavLink, withRouter, Redirect } from "react-router-dom";
 import { gettingSearchCenter, resetFail } from "../redux/actionCreator";
 import {
+  Form,
   Button,
   Divider,
   Grid,
   Header,
   Icon,
-  Input,
   Segment
 } from "semantic-ui-react";
 
@@ -41,7 +41,8 @@ class HomePage extends React.Component {
     }
   };
 
-  searchButtonHandler = () => {
+  searchButtonHandler = e => {
+    e.preventDefault();
     let a = this.state.searchedAddress;
     if (a.length === 5 && !isNaN(Number(a))) {
       this.props.gettingSearchCenter(this.state.searchedAddress);
@@ -64,29 +65,26 @@ class HomePage extends React.Component {
           <Grid columns={1} stackable textAlign="center">
             <Grid.Row verticalAlign="middle">
               <Grid.Column>
-                <Header icon>
+                <Header size="huge" icon>
                   <Icon name="world" />
-                  Search for Lost Pets:
+                  Search for Lost Pets in Your Area:
                 </Header>
               </Grid.Column>
-              <Input
-                onChange={e =>
-                  this.setState({ searchedAddress: e.target.value })
-                }
-                size="massive"
-                icon="search"
-                placeholder="Enter ZIP code..."
-                value={this.state.searchedAddress}
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                fluid
-                size="massive"
-                onClick={() => this.searchButtonHandler()}
-              >
-                Find Pets!
-              </Button>
+              <Form onSubmit={this.searchButtonHandler}>
+                <Form.Input
+                  size="big"
+                  icon="search"
+                  iconPosition="left"
+                  placeholder="Enter ZIP code..."
+                  onChange={e =>
+                    this.setState({ searchedAddress: e.target.value })
+                  }
+                  value={this.state.searchedAddress}
+                />
+                <Button color="blue" fluid size="massive">
+                  Find Pets!
+                </Button>
+              </Form>
             </Grid.Row>
           </Grid>
         </Segment>
@@ -99,7 +97,13 @@ class HomePage extends React.Component {
                 <Header icon>
                   <Icon name="paw" />
                 </Header>
-                <Button as={NavLink} to="/register" primary fluid size="huge">
+                <Button
+                  as={NavLink}
+                  to="/register"
+                  color="orange"
+                  fluid
+                  size="huge"
+                >
                   Post Lost Pet
                 </Button>
               </Grid.Column>
@@ -111,7 +115,7 @@ class HomePage extends React.Component {
                 <Button
                   as={NavLink}
                   to="/home_container"
-                  primary
+                  color="blue"
                   fluid
                   size="huge"
                 >

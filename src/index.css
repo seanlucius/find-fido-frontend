@@ -34,3 +34,7 @@ h4 {
   text-decoration: underline;
   font-weight: bold;
 }
+
+.geobutton {
+  width: 30px;
+}

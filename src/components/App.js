@@ -17,9 +17,9 @@ class App extends React.Component {
       <div>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={HomePage} />
           <Route path="/home_container" component={HomeContainer} />
           <Route path="/register" component={LostPetForm} />
+          <Route path="/" component={HomePage} />
         </Switch>
       </div>
     );

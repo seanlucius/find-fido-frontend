@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 class MapComponent extends React.Component {
   state = {
     viewport: {
-      width: 800,
-      height: 400,
+      width: "100%",
+      height: 500,
       latitude: this.props.mapCenter[0],
       longitude: this.props.mapCenter[1],
       zoom: 12
@@ -52,6 +52,7 @@ class MapComponent extends React.Component {
         onViewportChange={viewport => this.setState({ viewport })}
       >
         <GeolocateControl
+          className="geobutton"
           positionOptions={{ enableHighAccuracy: true }}
           trackUserLocation={true}
           onViewportChange={viewport => this.setState({ viewport })}

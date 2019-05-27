@@ -10,7 +10,12 @@ class HomeContainer extends React.Component {
           <h1>Local Map</h1>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column width={3} />
+          <Grid.Column width={3}>
+            <ul>
+              <li>Stuff</li>
+              <li>Stuff</li>
+            </ul>
+          </Grid.Column>
           <Grid.Column width={10}>
             <MapComponent />
           </Grid.Column>
