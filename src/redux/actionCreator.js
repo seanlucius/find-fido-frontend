@@ -4,7 +4,8 @@ import {
   POST_LOADING,
   FETCHED_MAP_CENTER,
   FAILED_FETCH,
-  RESET_FAIL
+  RESET_FAIL,
+  FETCHED_SIGHTINGS
 } from "./actionType";
 
 const URL = "http://localhost:3000/lost_pets";
@@ -157,11 +158,27 @@ function submittingSightingForm(sightingObj, coord) {
   };
 }
 
+function fetchingSightings() {
+  return dispatch => {
+    dispatch(loadingPetSubmit());
+    fetch("http://localhost:3000/sightings")
+      .then(resp => resp.json())
+      .then(sightingsArray => {
+        dispatch(fetchedSightings(sightingsArray));
+      });
+  };
+}
+
+function fetchedSightings(sightingsArray) {
+  return { type: FETCHED_SIGHTINGS, payload: sightingsArray };
+}
+
 export {
   fetchingLostPets,
   submittedLostPet,
   gettingLostPetPosition,
   gettingSearchCenter,
   resetFail,
-  gettingSightingPosition
+  gettingSightingPosition,
+  fetchingSightings
 };

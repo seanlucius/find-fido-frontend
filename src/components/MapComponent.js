@@ -69,6 +69,18 @@ class MapComponent extends React.Component {
             />
           </Marker>
         ))}
+        {this.props.sightings.map(sighting => (
+          <Marker
+            key={sighting.id}
+            latitude={sighting.latitude}
+            longitude={sighting.longitude}
+          >
+            <div
+              className={"sighting-marker"}
+              onClick={() => this.setState({ popUpInfo: sighting })}
+            />
+          </Marker>
+        ))}
         {this.renderPopup()}
       </ReactMapGL>
     );
@@ -78,7 +90,8 @@ class MapComponent extends React.Component {
 const mapStateToProps = store => ({
   lostPets: store.lostPets,
   loading: store.loading,
-  mapCenter: store.mapCenter
+  mapCenter: store.mapCenter,
+  sightings: store.sightings
 });
 
 export default connect(mapStateToProps)(MapComponent);

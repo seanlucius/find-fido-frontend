@@ -5,12 +5,13 @@ import HomeContainer from "./HomeContainer";
 import LostPetForm from "./LostPetForm";
 import PetSightingForm from "./PetSightingForm";
 import { Route, Switch, withRouter } from "react-router-dom";
-import { fetchingLostPets } from "../redux/actionCreator";
+import { fetchingLostPets, fetchingSightings } from "../redux/actionCreator";
 import { connect } from "react-redux";
 
 class App extends React.Component {
   componentDidMount() {
     this.props.fetchingLostPets();
+    this.props.fetchingSightings();
   }
 
   render() {
@@ -31,6 +32,6 @@ class App extends React.Component {
 export default withRouter(
   connect(
     null,
-    { fetchingLostPets }
+    { fetchingLostPets, fetchingSightings }
   )(App)
 );
