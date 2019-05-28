@@ -30,6 +30,12 @@ h4 {
   font-weight: bold;
 }
 
+.sightingname {
+  text-align: left;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .geobutton {
   width: 30px;
 }

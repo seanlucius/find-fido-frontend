@@ -6,7 +6,8 @@ import {
   FETCHED_MAP_CENTER,
   FAILED_FETCH,
   RESET_FAIL,
-  FETCHED_SIGHTINGS
+  FETCHED_SIGHTINGS,
+  POSTED_SIGHTING
 } from "./actionType";
 
 const loadingReducer = (oldState = false, action) => {
@@ -22,6 +23,8 @@ const loadingReducer = (oldState = false, action) => {
     case POST_LOST_PET:
       return false;
     case FETCHED_SIGHTINGS:
+      return false;
+    case POSTED_SIGHTING:
       return false;
     default:
       return oldState;
@@ -45,6 +48,8 @@ const mapCenterReducer = (oldState = [39.023805, -77.094242], action) => {
       return action.payload;
     case POST_LOST_PET:
       return [action.payload.latitude, action.payload.longitude];
+    case POSTED_SIGHTING:
+      return [action.payload.latitude, action.payload.longitude];
     default:
       return oldState;
   }
@@ -65,6 +70,8 @@ const sightingsReducer = (oldState = [], action) => {
   switch (action.type) {
     case FETCHED_SIGHTINGS:
       return action.payload;
+    case POSTED_SIGHTING:
+      return [...oldState, action.payload];
     default:
       return oldState;
   }

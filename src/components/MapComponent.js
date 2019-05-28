@@ -11,7 +11,8 @@ class MapComponent extends React.Component {
       longitude: this.props.mapCenter[1],
       zoom: 12
     },
-    popUpInfo: null
+    popUpInfo: null,
+    sightingPopUpInfo: null
   };
 
   renderPopup() {
@@ -35,6 +36,33 @@ class MapComponent extends React.Component {
           <p>Age: {popUpInfo.age}</p>
           <p>Color: {popUpInfo.color}</p>
           <button>Conact Owner</button>
+        </Popup>
+      )
+    );
+  }
+
+  renderSightingPopup() {
+    const { sightingPopUpInfo } = this.state;
+
+    return (
+      sightingPopUpInfo && (
+        <Popup
+          className="poster"
+          tipSize={5}
+          offsetLeft={20}
+          offsetTop={10}
+          longitude={sightingPopUpInfo.longitude}
+          latitude={sightingPopUpInfo.latitude}
+          closeOnClick={false}
+          onClose={() => this.setState({ sightingPopUpInfo: null })}
+        >
+          <div className="postername">Sighted: {sightingPopUpInfo.species}</div>
+          <img src={sightingPopUpInfo.picture} height="80px" alt="pet" />
+          <p>Breed: {sightingPopUpInfo.breed}</p>
+          <p>Age: {sightingPopUpInfo.age}</p>
+          <p>Color: {sightingPopUpInfo.color}</p>
+          <div className="sightingname">Contact Me:</div>
+          <p className="poster">{sightingPopUpInfo.name}</p>
         </Popup>
       )
     );
@@ -65,7 +93,9 @@ class MapComponent extends React.Component {
           >
             <div
               className={"marker"}
-              onClick={() => this.setState({ popUpInfo: pet })}
+              onClick={() =>
+                this.setState({ popUpInfo: pet, sightingPopUpInfo: null })
+              }
             />
           </Marker>
         ))}
@@ -77,11 +107,14 @@ class MapComponent extends React.Component {
           >
             <div
               className={"sighting-marker"}
-              onClick={() => this.setState({ popUpInfo: sighting })}
+              onClick={() =>
+                this.setState({ popUpInfo: null, sightingPopUpInfo: sighting })
+              }
             />
           </Marker>
         ))}
         {this.renderPopup()}
+        {this.renderSightingPopup()}
       </ReactMapGL>
     );
   }

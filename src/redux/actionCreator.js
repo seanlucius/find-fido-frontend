@@ -5,7 +5,8 @@ import {
   FETCHED_MAP_CENTER,
   FAILED_FETCH,
   RESET_FAIL,
-  FETCHED_SIGHTINGS
+  FETCHED_SIGHTINGS,
+  POSTED_SIGHTING
 } from "./actionType";
 
 const URL = "http://localhost:3000/lost_pets";
@@ -154,8 +155,14 @@ function submittingSightingForm(sightingObj, coord) {
       body: JSON.stringify(newSightingObj)
     })
       .then(resp => resp.json())
-      .then(postedSighting => console.log(postedSighting));
+      .then(postedSighting => {
+        dispatch(submittedSighting(postedSighting));
+      });
   };
+}
+
+function submittedSighting(sightingObj) {
+  return { type: POSTED_SIGHTING, payload: sightingObj };
 }
 
 function fetchingSightings() {
