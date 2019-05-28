@@ -5,13 +5,15 @@ import { NavLink, withRouter } from "react-router-dom";
 class Navbar extends React.Component {
   render() {
     return (
-      <Menu size="big" stackable>
+      <Menu size="large" stackable>
         <Menu.Item as={NavLink} exact to="/">
           <i class="paw icon" />
         </Menu.Item>
-
         <Menu.Item as={NavLink} to="/register">
           Register A Lost Pet
+        </Menu.Item>
+        <Menu.Item as={NavLink} to="/sighting">
+          Post a Sighting
         </Menu.Item>
         <Menu.Item as={NavLink} to="/home_container">
           Map

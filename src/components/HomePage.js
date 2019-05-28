@@ -114,7 +114,7 @@ class HomePage extends React.Component {
                 </Header>
                 <Button
                   as={NavLink}
-                  to="/home_container"
+                  to="/sighting"
                   color="blue"
                   fluid
                   size="huge"

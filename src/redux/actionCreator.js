@@ -45,7 +45,7 @@ function gettingLostPetPosition(petObj) {
         petObj.city
       }%2C${
         petObj.state
-      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA`
+      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA&types=address`
     )
       .then(resp => resp.json())
       .then(d => {
@@ -108,10 +108,60 @@ function resetFail() {
   return { type: RESET_FAIL };
 }
 
+// SIGHTINGS ACTION CREATORS
+
+function gettingSightingPosition(sightingObj) {
+  let splitAddress = sightingObj.street.split(" ");
+  let streetNum = splitAddress.shift();
+  let exceptStreetNum = splitAddress.map(m => "%20" + m).join("");
+  let streetQuery = streetNum + exceptStreetNum;
+
+  return dispatch => {
+    dispatch(loadingPetSubmit());
+    fetch(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${streetQuery}%2C${
+        sightingObj.city
+      }%2C${
+        sightingObj.state
+      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA&types=address`
+    )
+      .then(resp => resp.json())
+      .then(d => {
+        d.features.length === 0
+          ? dispatch(didNotFetch())
+          : dispatch(submittingSightingForm(sightingObj, d.features[0].center));
+      });
+  };
+}
+
+function submittingSightingForm(sightingObj, coord) {
+  let lat = coord[1];
+  let long = coord[0];
+  let newSightingObj = {
+    ...sightingObj,
+    latitude: lat,
+    longitude: long
+  };
+  return dispatch => {
+    dispatch(loadingPetSubmit());
+    fetch("http://localhost:3000/sightings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(newSightingObj)
+    })
+      .then(resp => resp.json())
+      .then(postedSighting => console.log(postedSighting));
+  };
+}
+
 export {
   fetchingLostPets,
   submittedLostPet,
   gettingLostPetPosition,
   gettingSearchCenter,
-  resetFail
+  resetFail,
+  gettingSightingPosition
 };
