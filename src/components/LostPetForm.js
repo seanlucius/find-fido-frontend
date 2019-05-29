@@ -205,7 +205,7 @@ class LostPetForm extends React.Component {
             verticalAlign="middle"
           >
             <Grid.Column style={{ maxWidth: 550 }}>
-              <Header as="h2" color="teal" textAlign="center">
+              <Header as="h1" color="orange" textAlign="center">
                 {" "}
                 Register Lost Pet
               </Header>
@@ -214,7 +214,7 @@ class LostPetForm extends React.Component {
                 onSubmit={this.onPost}
                 error={this.state.formError}
               >
-                <Segment stacked>
+                <Segment className="lostform">
                   <Form.Input
                     label="Your Pet's Name"
                     placeholder=""
@@ -294,7 +294,7 @@ class LostPetForm extends React.Component {
                     }
                     error={this.state.instructionsError}
                   />
-                  <Button color="teal" fluid size="large">
+                  <Button color="orange" fluid size="large">
                     Create Lost Poster
                   </Button>
                 </Segment>

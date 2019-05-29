@@ -36,6 +36,7 @@ class MapComponent extends React.Component {
           <p>Age: {popUpInfo.age}</p>
           <p>Color: {popUpInfo.color}</p>
           <button>Conact Owner</button>
+          <a href={`sms:${popUpInfo.user.phone}`}>{popUpInfo.user.phone}</a>
         </Popup>
       )
     );
@@ -62,7 +63,11 @@ class MapComponent extends React.Component {
           <p>Age: {sightingPopUpInfo.age}</p>
           <p>Color: {sightingPopUpInfo.color}</p>
           <div className="sightingname">Contact Me:</div>
-          <p className="poster">{sightingPopUpInfo.name}</p>
+          <p className="poster">
+            <a href={`mailto:${sightingPopUpInfo.name}`}>
+              {sightingPopUpInfo.name}
+            </a>
+          </p>
         </Popup>
       )
     );

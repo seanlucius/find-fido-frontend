@@ -204,16 +204,16 @@ class PetSightingForm extends React.Component {
             verticalAlign="middle"
           >
             <Grid.Column style={{ maxWidth: 550 }}>
-              <Header as="h2" color="teal" textAlign="center">
+              <Header as="h1" color="blue" textAlign="center">
                 {" "}
-                Create a Post for a Possible Lost Pet Sigthing
+                Post a Possible Lost Pet Sighting
               </Header>
               <Form
                 size="large"
                 onSubmit={this.onPost}
                 error={this.state.formError}
               >
-                <Segment stacked>
+                <Segment className="sightingform">
                   <Form.Input
                     placeholder="Picture"
                     onChange={e => this.setState({ picture: e.target.value })}
@@ -295,7 +295,7 @@ class PetSightingForm extends React.Component {
                     onChange={e => this.setState({ name: e.target.value })}
                     error={this.state.nameError}
                   />
-                  <Button color="teal" fluid size="large">
+                  <Button color="blue" fluid size="large">
                     Create Pet Sighting
                   </Button>
                 </Segment>

@@ -10,10 +10,10 @@ class Navbar extends React.Component {
           <i class="paw icon" />
         </Menu.Item>
         <Menu.Item as={NavLink} to="/register">
-          Register A Lost Pet
+          Register Pet
         </Menu.Item>
         <Menu.Item as={NavLink} to="/sighting">
-          Post a Sighting
+          Post Sighting
         </Menu.Item>
         <Menu.Item as={NavLink} to="/home_container">
           Map
