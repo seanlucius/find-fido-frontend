@@ -13,7 +13,6 @@ import {
 
 class LostPetForm extends React.Component {
   state = {
-    user_id: 2,
     name: "",
     nameError: false,
     street: "",
@@ -141,7 +140,7 @@ class LostPetForm extends React.Component {
     }
 
     let pet = {
-      user_id: this.state.user_id,
+      user_id: this.props.currentUser.id,
       name: this.state.name,
       street: this.state.street,
       city: this.state.city,
@@ -189,122 +188,131 @@ class LostPetForm extends React.Component {
     return (
       <>
         {this.renderRedirect()}
-        <div className="login-form">
-          <style>
-            {`
+        {this.props.currentUser === null ? (
+          <Header as="h1" color="orange" textAlign="center">
+            {" "}
+            You Must Log In or Create an Account to Register a Lost Pet!
+          </Header>
+        ) : (
+          <div className="login-form">
+            <style>
+              {`
           body > div,
           body > div > div,
           body > div > div > div.login-form {
             height: 100%;
           }
         `}
-          </style>
-          <Grid
-            textAlign="center"
-            style={{ height: "100%" }}
-            verticalAlign="middle"
-          >
-            <Grid.Column style={{ maxWidth: 550 }}>
-              <Header as="h1" color="orange" textAlign="center">
-                {" "}
-                Register Lost Pet
-              </Header>
-              <Form
-                size="large"
-                onSubmit={this.onPost}
-                error={this.state.formError}
-              >
-                <Segment className="lostform">
-                  <Form.Input
-                    label="Your Pet's Name"
-                    placeholder=""
-                    onChange={e => this.setState({ name: e.target.value })}
-                    error={this.state.nameError}
-                  />
-                  <h4>Address Last Seen At:</h4>
-                  <Form.Group widths="equal">
+            </style>
+            <Grid
+              textAlign="center"
+              style={{ height: "100%" }}
+              verticalAlign="middle"
+            >
+              <Grid.Column style={{ maxWidth: 550 }}>
+                <Header as="h1" color="orange" textAlign="center">
+                  {" "}
+                  Register Lost Pet
+                </Header>
+                <Form
+                  size="large"
+                  onSubmit={this.onPost}
+                  error={this.state.formError}
+                >
+                  <Segment className="lostform">
                     <Form.Input
-                      label="Street Address"
+                      label="Your Pet's Name"
                       placeholder=""
-                      onChange={e => this.setState({ street: e.target.value })}
-                      error={this.state.streetError}
-                      required={true}
+                      onChange={e => this.setState({ name: e.target.value })}
+                      error={this.state.nameError}
+                    />
+                    <h4>Address Last Seen At:</h4>
+                    <Form.Group widths="equal">
+                      <Form.Input
+                        label="Street Address"
+                        placeholder=""
+                        onChange={e =>
+                          this.setState({ street: e.target.value })
+                        }
+                        error={this.state.streetError}
+                        required={true}
+                      />
+                      <Form.Input
+                        label="City"
+                        placeholder=""
+                        onChange={e => this.setState({ city: e.target.value })}
+                        error={this.state.cityError}
+                      />
+                    </Form.Group>
+                    <Form.Group widths="equal">
+                      <Form.Input
+                        label="State"
+                        placeholder=""
+                        onChange={e => this.setState({ state: e.target.value })}
+                        error={this.state.stateError}
+                      />
+                      <Form.Input
+                        label="ZIP Code"
+                        placeholder=""
+                        onChange={e => this.setState({ zip: e.target.value })}
+                        error={this.state.zipError}
+                      />
+                    </Form.Group>
+                    <Form.Input
+                      placeholder="Picture"
+                      onChange={e => this.setState({ picture: e.target.value })}
                     />
                     <Form.Input
-                      label="City"
-                      placeholder=""
-                      onChange={e => this.setState({ city: e.target.value })}
-                      error={this.state.cityError}
-                    />
-                  </Form.Group>
-                  <Form.Group widths="equal">
-                    <Form.Input
-                      label="State"
-                      placeholder=""
-                      onChange={e => this.setState({ state: e.target.value })}
-                      error={this.state.stateError}
+                      placeholder="Species"
+                      onChange={e => this.setState({ species: e.target.value })}
+                      error={this.state.speciesError}
                     />
                     <Form.Input
-                      label="ZIP Code"
-                      placeholder=""
-                      onChange={e => this.setState({ zip: e.target.value })}
-                      error={this.state.zipError}
+                      placeholder="Breed"
+                      onChange={e => this.setState({ breed: e.target.value })}
+                      error={this.state.breedError}
                     />
-                  </Form.Group>
-                  <Form.Input
-                    placeholder="Picture"
-                    onChange={e => this.setState({ picture: e.target.value })}
-                  />
-                  <Form.Input
-                    placeholder="Species"
-                    onChange={e => this.setState({ species: e.target.value })}
-                    error={this.state.speciesError}
-                  />
-                  <Form.Input
-                    placeholder="Breed"
-                    onChange={e => this.setState({ breed: e.target.value })}
-                    error={this.state.breedError}
-                  />
-                  <Form.Input
-                    placeholder="Sex"
-                    onChange={e => this.setState({ sex: e.target.value })}
-                    error={this.state.sexError}
-                  />
-                  <Form.Input
-                    placeholder="Age"
-                    onChange={e => this.setState({ age: e.target.value })}
-                    error={this.state.ageError}
-                  />
-                  <Form.Input
-                    placeholder="Color"
-                    onChange={e => this.setState({ color: e.target.value })}
-                    error={this.state.colorError}
-                  />
-                  <Form.Input
-                    placeholder="Defining Features"
-                    onChange={e =>
-                      this.setState({ defining_features: e.target.value })
-                    }
-                    error={this.state.definingFeaturesError}
-                  />
-                  <Form.TextArea
-                    placeholder="If found instructions"
-                    onChange={e =>
-                      this.setState({ instructions: e.target.value })
-                    }
-                    error={this.state.instructionsError}
-                  />
-                  <Button color="orange" fluid size="large">
-                    Create Lost Poster
-                  </Button>
-                </Segment>
-              </Form>
-              <Message>
-                New to us? <a href="#">Sign Up</a>
-              </Message>
-            </Grid.Column>
-          </Grid>
-        </div>
+                    <Form.Input
+                      placeholder="Sex"
+                      onChange={e => this.setState({ sex: e.target.value })}
+                      error={this.state.sexError}
+                    />
+                    <Form.Input
+                      placeholder="Age"
+                      onChange={e => this.setState({ age: e.target.value })}
+                      error={this.state.ageError}
+                    />
+                    <Form.Input
+                      placeholder="Color"
+                      onChange={e => this.setState({ color: e.target.value })}
+                      error={this.state.colorError}
+                    />
+                    <Form.Input
+                      placeholder="Defining Features"
+                      onChange={e =>
+                        this.setState({ defining_features: e.target.value })
+                      }
+                      error={this.state.definingFeaturesError}
+                    />
+                    <Form.TextArea
+                      placeholder="If found instructions"
+                      onChange={e =>
+                        this.setState({ instructions: e.target.value })
+                      }
+                      error={this.state.instructionsError}
+                    />
+                    <Button color="orange" fluid size="large">
+                      Create Lost Poster
+                    </Button>
+                  </Segment>
+                </Form>
+                <Message>
+                  New to us? <a href="#">Sign Up</a>
+                </Message>
+              </Grid.Column>
+            </Grid>
+          </div>
+        )}
       </>
     );
   }
@@ -312,7 +320,8 @@ class LostPetForm extends React.Component {
 
 const mapStateToProps = store => ({
   loading: store.loading,
-  failed: store.failed
+  failed: store.failed,
+  currentUser: store.currentUser
 });
 
 export default withRouter(

@@ -1,8 +1,15 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
 import { NavLink, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { userLogOut } from "../redux/actionCreator";
 
 class Navbar extends React.Component {
+  handleLogOut = () => {
+    localStorage.removeItem("token");
+    this.props.userLogOut();
+  };
+
   render() {
     return (
       <Menu size="large" stackable>
@@ -18,10 +25,27 @@ class Navbar extends React.Component {
         <Menu.Item as={NavLink} to="/home_container">
           Map
         </Menu.Item>
-        <Menu.Item position="right">Sign-in</Menu.Item>
+        {this.props.currentUser !== null ? (
+          <Menu.Item position="right" onClick={this.handleLogOut}>
+            Log Out
+          </Menu.Item>
+        ) : (
+          <Menu.Item position="right" as={NavLink} to="/login">
+            Log In
+          </Menu.Item>
+        )}
       </Menu>
     );
   }
 }
 
-export default withRouter(Navbar);
+const mapStateToProps = store => ({
+  currentUser: store.currentUser
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { userLogOut }
+  )(Navbar)
+);

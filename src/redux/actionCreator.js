@@ -6,7 +6,9 @@ import {
   FAILED_FETCH,
   RESET_FAIL,
   FETCHED_SIGHTINGS,
-  POSTED_SIGHTING
+  POSTED_SIGHTING,
+  LOGGED_IN,
+  LOGGED_OUT
 } from "./actionType";
 
 const URL = "http://localhost:3000/lost_pets";
@@ -180,6 +182,15 @@ function fetchedSightings(sightingsArray) {
   return { type: FETCHED_SIGHTINGS, payload: sightingsArray };
 }
 
+// USER LOGIN/LOGOUT ACTION CREATORS
+
+function userLogIn(user) {
+  return { type: LOGGED_IN, payload: user };
+}
+
+function userLogOut() {
+  return { type: LOGGED_OUT };
+}
 export {
   fetchingLostPets,
   submittedLostPet,
@@ -187,5 +198,7 @@ export {
   gettingSearchCenter,
   resetFail,
   gettingSightingPosition,
-  fetchingSightings
+  fetchingSightings,
+  userLogIn,
+  userLogOut
 };

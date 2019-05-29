@@ -7,7 +7,9 @@ import {
   FAILED_FETCH,
   RESET_FAIL,
   FETCHED_SIGHTINGS,
-  POSTED_SIGHTING
+  POSTED_SIGHTING,
+  LOGGED_IN,
+  LOGGED_OUT
 } from "./actionType";
 
 const loadingReducer = (oldState = false, action) => {
@@ -77,12 +79,24 @@ const sightingsReducer = (oldState = [], action) => {
   }
 };
 
+const currentUserReducer = (oldState = null, action) => {
+  switch (action.type) {
+    case LOGGED_IN:
+      return action.payload;
+    case LOGGED_OUT:
+      return null;
+    default:
+      return oldState;
+  }
+};
+
 const rootReducer = combineReducers({
   lostPets: lostPetsReducer,
   loading: loadingReducer,
   mapCenter: mapCenterReducer,
   failed: failedReducer,
-  sightings: sightingsReducer
+  sightings: sightingsReducer,
+  currentUser: currentUserReducer
 });
 
 export default rootReducer;
