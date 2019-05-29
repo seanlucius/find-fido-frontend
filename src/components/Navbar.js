@@ -26,9 +26,12 @@ class Navbar extends React.Component {
           Map
         </Menu.Item>
         {this.props.currentUser !== null ? (
-          <Menu.Item position="right" onClick={this.handleLogOut}>
-            Log Out
-          </Menu.Item>
+          <Menu.Menu position="right">
+            <Menu.Item>Account</Menu.Item>
+            <Menu.Item position="right" onClick={this.handleLogOut}>
+              Log Out
+            </Menu.Item>
+          </Menu.Menu>
         ) : (
           <Menu.Item position="right" as={NavLink} to="/login">
             Log In

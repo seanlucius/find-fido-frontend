@@ -191,7 +191,7 @@ class LostPetForm extends React.Component {
         {this.props.currentUser === null ? (
           <Header as="h1" color="orange" textAlign="center">
             {" "}
-            You Must Log In or Create an Account to Register a Lost Pet!
+            Please Log In/Create an Account to Register a Lost Pet!
           </Header>
         ) : (
           <div className="login-form">
