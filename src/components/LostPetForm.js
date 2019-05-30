@@ -2,14 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { gettingLostPetPosition, resetFail } from "../redux/actionCreator";
 import { withRouter, Redirect } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 const speciesOptions = [
   { key: "d", text: "Dog", value: "Dog" },
@@ -150,6 +143,7 @@ class LostPetForm extends React.Component {
 
     if (error) {
       this.setState({ formError: true });
+      window.alert("Highlighted fields cannot be left empty!");
       return;
     } else {
       this.setState({ formError: false });
@@ -248,6 +242,7 @@ class LostPetForm extends React.Component {
                       placeholder=""
                       onChange={e => this.setState({ name: e.target.value })}
                       error={this.state.nameError}
+                      required={true}
                     />
                     <h4>Address Last Seen At:</h4>
                     <Form.Group widths="equal">
@@ -265,6 +260,7 @@ class LostPetForm extends React.Component {
                         placeholder=""
                         onChange={e => this.setState({ city: e.target.value })}
                         error={this.state.cityError}
+                        required={true}
                       />
                     </Form.Group>
                     <Form.Group widths="equal">
@@ -273,18 +269,21 @@ class LostPetForm extends React.Component {
                         placeholder=""
                         onChange={e => this.setState({ state: e.target.value })}
                         error={this.state.stateError}
+                        required={true}
                       />
                       <Form.Input
                         label="ZIP Code"
                         placeholder=""
                         onChange={e => this.setState({ zip: e.target.value })}
                         error={this.state.zipError}
+                        required={true}
                       />
                     </Form.Group>
                     <h4>Pet Details:</h4>
                     <Form.Input
                       placeholder="Picture"
                       onChange={e => this.setState({ picture: e.target.value })}
+                      required={true}
                     />
                     <Form.Group widths="equal">
                       <Form.Select
@@ -330,6 +329,7 @@ class LostPetForm extends React.Component {
                       placeholder="Color"
                       onChange={e => this.setState({ color: e.target.value })}
                       error={this.state.colorError}
+                      required={true}
                     />
                     <Form.Input
                       placeholder="Defining Features"
@@ -337,6 +337,7 @@ class LostPetForm extends React.Component {
                         this.setState({ defining_features: e.target.value })
                       }
                       error={this.state.definingFeaturesError}
+                      required={true}
                     />
                     <Form.TextArea
                       placeholder="If found instructions"
@@ -344,15 +345,13 @@ class LostPetForm extends React.Component {
                         this.setState({ instructions: e.target.value })
                       }
                       error={this.state.instructionsError}
+                      required={true}
                     />
                     <Button color="orange" fluid size="large">
                       Create Lost Poster
                     </Button>
                   </Segment>
                 </Form>
-                <Message>
-                  New to us? <a href="/signup">Sign Up</a>
-                </Message>
               </Grid.Column>
             </Grid>
           </div>

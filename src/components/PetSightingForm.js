@@ -11,6 +11,22 @@ import {
   Segment
 } from "semantic-ui-react";
 
+const speciesOptions = [
+  { key: "d", text: "Dog", value: "Dog" },
+  { key: "c", text: "Cat", value: "Cat" },
+  { key: "ro", text: "Rodent", value: "Rodent" },
+  { key: "b", text: "Bird", value: "Bird" },
+  { key: "l", text: "Livestock", value: "Livestock" },
+  { key: "re", text: "Reptile", value: "Reptile" }
+];
+
+const ageOptions = [
+  { key: "b", text: "Baby(0 - 1yr)", value: "Baby" },
+  { key: "y", text: "Young(1 - 3yr)", value: "Young" },
+  { key: "a", text: "Adult(3 - 10yr)", value: "Adult" },
+  { key: "o", text: "Old(10yr+)", value: "Old" }
+];
+
 class PetSightingForm extends React.Component {
   state = {
     picture: "",
@@ -184,7 +200,14 @@ class PetSightingForm extends React.Component {
     }
   };
 
+  handleSpeciesSelect = (e, { value }) => this.setState({ species: value });
+
+  handleAgeSelect = (e, { value }) => this.setState({ age: value });
+
+  handleSexChange = (e, { value }) => this.setState({ sex: value });
+
   render() {
+    const { value } = this.state;
     return (
       <>
         {this.renderRedirect()}
@@ -248,25 +271,46 @@ class PetSightingForm extends React.Component {
                       error={this.state.zipError}
                     />
                   </Form.Group>
-                  <Form.Input
+                  <Form.Select
+                    onChange={this.handleSpeciesSelect}
+                    value={value}
+                    fluid
+                    label="Species"
+                    options={speciesOptions}
                     placeholder="Species"
-                    onChange={e => this.setState({ species: e.target.value })}
-                    error={this.state.speciesError}
                   />
                   <Form.Input
                     placeholder="Breed"
                     onChange={e => this.setState({ breed: e.target.value })}
                     error={this.state.breedError}
                   />
-                  <Form.Input
-                    placeholder="Sex"
-                    onChange={e => this.setState({ sex: e.target.value })}
-                    error={this.state.sexError}
-                  />
-                  <Form.Input
+                  <Form.Group inline>
+                    <label>Sex</label>
+                    <Form.Radio
+                      label="Male"
+                      value="Male"
+                      checked={this.state.sex === "Male"}
+                      onChange={this.handleSexChange}
+                    />
+                    <Form.Radio
+                      label="Female"
+                      value="Female"
+                      checked={this.state.sex === "Female"}
+                      onChange={this.handleSexChange}
+                    />
+                    <Form.Radio
+                      label="Unkown"
+                      value="Unkown"
+                      checked={this.state.sex === "Unkown"}
+                      onChange={this.handleSexChange}
+                    />
+                  </Form.Group>
+                  <Form.Select
+                    onChange={this.handleAgeSelect}
+                    value={value}
+                    fluid
+                    options={ageOptions}
                     placeholder="Age"
-                    onChange={e => this.setState({ age: e.target.value })}
-                    error={this.state.ageError}
                   />
                   <Form.Input
                     placeholder="Color"

@@ -8,6 +8,8 @@ class Navbar extends React.Component {
   handleLogOut = () => {
     localStorage.removeItem("token");
     this.props.userLogOut();
+    this.props.history.push("/");
+    window.alert("Logged out. Goodbye!");
   };
 
   render() {
