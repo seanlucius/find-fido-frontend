@@ -1,6 +1,8 @@
 import React from "react";
 import ReactMapGL, { GeolocateControl, Marker, Popup } from "react-map-gl";
+import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { Button } from "semantic-ui-react";
 
 class MapComponent extends React.Component {
   state = {
@@ -21,8 +23,8 @@ class MapComponent extends React.Component {
     return (
       popUpInfo && (
         <Popup
-          className="poster"
-          tipSize={5}
+          className="lostpop"
+          tipSize={1}
           offsetLeft={20}
           offsetTop={10}
           longitude={popUpInfo.longitude}
@@ -30,13 +32,27 @@ class MapComponent extends React.Component {
           closeOnClick={false}
           onClose={() => this.setState({ popUpInfo: null })}
         >
-          <div className="postername">{popUpInfo.name}</div>
+          <div className="postername">
+            Lost {popUpInfo.species}: {popUpInfo.name}
+          </div>
           <img src={popUpInfo.picture} height="80px" alt="pet" />
           <p>Breed: {popUpInfo.breed}</p>
           <p>Age: {popUpInfo.age}</p>
           <p>Color: {popUpInfo.color}</p>
-          <button>Conact Owner</button>
-          <a href={`sms:${popUpInfo.user.phone}`}>{popUpInfo.user.phone}</a>
+          {this.props.currentUser === null ? (
+            <Button as={NavLink} to="/login" color="orange" fluid size="tiny">
+              Log in to contact
+            </Button>
+          ) : (
+            <div className="sightingname">
+              Contact {popUpInfo.user.name}:
+              <p className="poster">
+                <a href={`sms:${popUpInfo.user.phone}`}>
+                  {popUpInfo.user.phone}
+                </a>
+              </p>
+            </div>
+          )}
         </Popup>
       )
     );
@@ -48,8 +64,8 @@ class MapComponent extends React.Component {
     return (
       sightingPopUpInfo && (
         <Popup
-          className="poster"
-          tipSize={5}
+          className="sightingpop"
+          tipSize={1}
           offsetLeft={20}
           offsetTop={10}
           longitude={sightingPopUpInfo.longitude}
@@ -62,12 +78,20 @@ class MapComponent extends React.Component {
           <p>Breed: {sightingPopUpInfo.breed}</p>
           <p>Age: {sightingPopUpInfo.age}</p>
           <p>Color: {sightingPopUpInfo.color}</p>
-          <div className="sightingname">Contact Me:</div>
-          <p className="poster">
-            <a href={`mailto:${sightingPopUpInfo.name}`}>
-              {sightingPopUpInfo.name}
-            </a>
-          </p>
+          {this.props.currentUser === null ? (
+            <Button as={NavLink} to="/login" color="blue" fluid size="tiny">
+              Log in to contact
+            </Button>
+          ) : (
+            <div className="sightingname">
+              Contact Me:
+              <p className="poster">
+                <a href={`mailto:${sightingPopUpInfo.name}`}>
+                  {sightingPopUpInfo.name}
+                </a>
+              </p>
+            </div>
+          )}
         </Popup>
       )
     );
@@ -129,7 +153,8 @@ const mapStateToProps = store => ({
   lostPets: store.lostPets,
   loading: store.loading,
   mapCenter: store.mapCenter,
-  sightings: store.sightings
+  sightings: store.sightings,
+  currentUser: store.currentUser
 });
 
-export default connect(mapStateToProps)(MapComponent);
+export default withRouter(connect(mapStateToProps)(MapComponent));

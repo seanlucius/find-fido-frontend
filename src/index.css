@@ -25,6 +25,16 @@ h1 {
   cursor: pointer;
 }
 
+.lostpop {
+  text-align: center;
+  border: 2px solid #f2711c !important;
+}
+
+.sightingpop {
+  text-align: center;
+  border: 2px solid #2185d0 !important;
+}
+
 .poster {
   text-align: center;
 }

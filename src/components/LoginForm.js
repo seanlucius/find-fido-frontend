@@ -35,6 +35,8 @@ class LoginForm extends React.Component {
         if (d["status"] === "accepted") {
           localStorage.setItem("token", d.jwt);
           this.props.userLogIn(d.user);
+          window.alert(`Welcome, back ${d.user.name}!`);
+          this.props.history.push("/home_container");
         } else {
           window.alert(d.message);
         }
