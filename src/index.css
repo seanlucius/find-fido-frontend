@@ -7,6 +7,11 @@ h1 {
   text-decoration: underline;
 }
 
+h3 {
+  text-align: center;
+  text-decoration: underline;
+}
+
 .marker {
   background-image: url("./images/lostpaw.png");
   background-size: cover;
@@ -60,4 +65,13 @@ h1 {
 
 .sightingform {
   border: 2px solid #2185d0 !important;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  color: blue;
+  text-decoration: underline;
+  text-decoration-style: double;
+  text-decoration-color: blue;
 }

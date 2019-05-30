@@ -61,6 +61,7 @@ class HomePage extends React.Component {
     return (
       <>
         {this.renderRedirect()}
+        <h1 className="title">Welcome To Find Fido!</h1>
         <Segment placeholder>
           <Grid columns={1} stackable textAlign="center">
             <Grid.Row verticalAlign="middle">

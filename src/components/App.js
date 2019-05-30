@@ -5,6 +5,7 @@ import HomeContainer from "./HomeContainer";
 import LostPetForm from "./LostPetForm";
 import PetSightingForm from "./PetSightingForm";
 import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { fetchingLostPets, fetchingSightings } from "../redux/actionCreator";
 import { connect } from "react-redux";
@@ -21,6 +22,7 @@ class App extends React.Component {
         <Navbar />
         <Switch>
           <Route path="/home_container" component={HomeContainer} />
+          <Route path="/signup" component={SignUpForm} />
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={LostPetForm} />
           <Route path="/sighting" component={PetSightingForm} />

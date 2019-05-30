@@ -8,7 +8,8 @@ import {
   FETCHED_SIGHTINGS,
   POSTED_SIGHTING,
   LOGGED_IN,
-  LOGGED_OUT
+  LOGGED_OUT,
+  MOVE_TO_LOCATION
 } from "./actionType";
 
 const URL = "http://localhost:3000/lost_pets";
@@ -191,6 +192,12 @@ function userLogIn(user) {
 function userLogOut() {
   return { type: LOGGED_OUT };
 }
+
+// MOVE TO MAP POSITION
+function moveToLocation(pet) {
+  return { type: MOVE_TO_LOCATION, payload: pet };
+}
+
 export {
   fetchingLostPets,
   submittedLostPet,
@@ -200,5 +207,6 @@ export {
   gettingSightingPosition,
   fetchingSightings,
   userLogIn,
-  userLogOut
+  userLogOut,
+  moveToLocation
 };

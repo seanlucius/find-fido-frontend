@@ -1,43 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
 import { userLogIn } from "../redux/actionCreator";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Button, Form, Grid, Header, Segment } from "semantic-ui-react";
 
 class LoginForm extends React.Component {
   state = {
+    name: "",
+    phone: "",
     email: "",
+    address: "",
     password: ""
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       },
       body: JSON.stringify({
+        name: this.state.name,
+        phone: this.state.phone,
         email: this.state.email,
+        address: this.state.address,
         password: this.state.password
       })
     })
       .then(r => r.json())
       .then(d => {
-        if (d["status"] === "accepted") {
+        if (d["status"] === "created") {
           localStorage.setItem("token", d.jwt);
           this.props.userLogIn(d.user);
-          window.alert(`Welcome, back ${d.user.name}!`);
+          window.alert(`Welcome, ${d.user.name}!`);
           this.props.history.push("/home_container");
         } else {
-          window.alert(d.message);
+          window.alert(d.error);
         }
       });
   };
@@ -51,7 +50,7 @@ class LoginForm extends React.Component {
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" color="blue" textAlign="center">
-            Log in to your account
+            Sign up for an account
           </Header>
           <Form size="large" onSubmit={this.handleSubmit}>
             <Segment stacked>
@@ -59,8 +58,29 @@ class LoginForm extends React.Component {
                 fluid
                 icon="user"
                 iconPosition="left"
+                placeholder="Name"
+                onChange={e => this.setState({ name: e.target.value })}
+              />
+              <Form.Input
+                fluid
+                icon="phone"
+                iconPosition="left"
+                placeholder="Phone Number"
+                onChange={e => this.setState({ phone: e.target.value })}
+              />
+              <Form.Input
+                fluid
+                icon="mail"
+                iconPosition="left"
                 placeholder="E-mail address"
                 onChange={e => this.setState({ email: e.target.value })}
+              />
+              <Form.Input
+                fluid
+                icon="home"
+                iconPosition="left"
+                placeholder="Home Address"
+                onChange={e => this.setState({ address: e.target.value })}
               />
               <Form.Input
                 fluid
@@ -76,9 +96,6 @@ class LoginForm extends React.Component {
               </Button>
             </Segment>
           </Form>
-          <Message>
-            New to us? <a href="/signup">Sign Up</a>
-          </Message>
         </Grid.Column>
       </Grid>
     );

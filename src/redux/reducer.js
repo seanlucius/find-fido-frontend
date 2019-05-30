@@ -9,7 +9,8 @@ import {
   FETCHED_SIGHTINGS,
   POSTED_SIGHTING,
   LOGGED_IN,
-  LOGGED_OUT
+  LOGGED_OUT,
+  MOVE_TO_LOCATION
 } from "./actionType";
 
 const loadingReducer = (oldState = false, action) => {
@@ -44,13 +45,15 @@ const lostPetsReducer = (oldState = [], action) => {
   }
 };
 
-const mapCenterReducer = (oldState = [39.023805, -77.094242], action) => {
+const mapCenterReducer = (oldState = [38.90293, -77.037898], action) => {
   switch (action.type) {
     case FETCHED_MAP_CENTER:
       return action.payload;
     case POST_LOST_PET:
       return [action.payload.latitude, action.payload.longitude];
     case POSTED_SIGHTING:
+      return [action.payload.latitude, action.payload.longitude];
+    case MOVE_TO_LOCATION:
       return [action.payload.latitude, action.payload.longitude];
     default:
       return oldState;

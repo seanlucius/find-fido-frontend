@@ -33,9 +33,14 @@ class Navbar extends React.Component {
             </Menu.Item>
           </Menu.Menu>
         ) : (
-          <Menu.Item position="right" as={NavLink} to="/login">
-            Log In
-          </Menu.Item>
+          <Menu.Menu position="right">
+            <Menu.Item as={NavLink} to="/signup">
+              Sign Up
+            </Menu.Item>
+            <Menu.Item position="right" as={NavLink} to="/login">
+              Log In
+            </Menu.Item>
+          </Menu.Menu>
         )}
       </Menu>
     );
