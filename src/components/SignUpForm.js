@@ -92,7 +92,7 @@ class LoginForm extends React.Component {
               />
 
               <Button color="blue" fluid size="large">
-                Login
+                Create Account
               </Button>
             </Segment>
           </Form>

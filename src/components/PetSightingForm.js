@@ -238,8 +238,10 @@ class PetSightingForm extends React.Component {
               >
                 <Segment className="sightingform">
                   <Form.Input
+                    label="Post a picture of the pet"
                     placeholder="Picture"
                     onChange={e => this.setState({ picture: e.target.value })}
+                    required={true}
                   />
                   <h4>Address Closest to Sighting:</h4>
                   <Form.Group widths="equal">
@@ -255,6 +257,7 @@ class PetSightingForm extends React.Component {
                       placeholder=""
                       onChange={e => this.setState({ city: e.target.value })}
                       error={this.state.cityError}
+                      required={true}
                     />
                   </Form.Group>
                   <Form.Group widths="equal">
@@ -263,12 +266,14 @@ class PetSightingForm extends React.Component {
                       placeholder=""
                       onChange={e => this.setState({ state: e.target.value })}
                       error={this.state.stateError}
+                      required={true}
                     />
                     <Form.Input
                       label="ZIP Code"
                       placeholder=""
                       onChange={e => this.setState({ zip: e.target.value })}
                       error={this.state.zipError}
+                      required={true}
                     />
                   </Form.Group>
                   <Form.Select
@@ -316,6 +321,7 @@ class PetSightingForm extends React.Component {
                     placeholder="Color"
                     onChange={e => this.setState({ color: e.target.value })}
                     error={this.state.colorError}
+                    required={true}
                   />
                   <Form.Input
                     label="Defining Features"
@@ -338,6 +344,7 @@ class PetSightingForm extends React.Component {
                     placeholder=""
                     onChange={e => this.setState({ name: e.target.value })}
                     error={this.state.nameError}
+                    required={true}
                   />
                   <Button color="blue" fluid size="large">
                     Create Pet Sighting
