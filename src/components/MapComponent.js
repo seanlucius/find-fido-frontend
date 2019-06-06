@@ -4,6 +4,8 @@ import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button } from "semantic-ui-react";
 
+const MAPBOX_KEY = `${process.env.REACT_APP_MAPBOX_KEY}`;
+
 class MapComponent extends React.Component {
   state = {
     viewport: {
@@ -103,9 +105,7 @@ class MapComponent extends React.Component {
     ) : (
       <ReactMapGL
         {...this.state.viewport}
-        mapboxApiAccessToken={
-          "pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA"
-        }
+        mapboxApiAccessToken={MAPBOX_KEY}
         onViewportChange={viewport => this.setState({ viewport })}
       >
         <GeolocateControl

@@ -13,6 +13,7 @@ import {
 } from "./actionType";
 
 const URL = "http://localhost:3000/lost_pets";
+const MAPBOX_KEY = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
 function fetchingLostPets() {
   return dispatch => {
@@ -50,7 +51,7 @@ function gettingLostPetPosition(petObj) {
         petObj.city
       }%2C${
         petObj.state
-      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA&types=address`
+      }.json?country=us&limit=1&access_token=${MAPBOX_KEY}&types=address`
     )
       .then(resp => resp.json())
       .then(d => {
@@ -90,7 +91,7 @@ function gettingSearchCenter(zip) {
   return dispatch => {
     dispatch(loadingPetSubmit());
     fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${zip}.json?access_token=pk.eyJ1IjoibWF0dGZpY2tlIiwiYSI6ImNqNnM2YmFoNzAwcTMzM214NTB1NHdwbnoifQ.Or19S7KmYPHW8YjRz82v6g&country=us&types=postcode&limit=1`
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${zip}.json?access_token=${MAPBOX_KEY}&country=us&types=postcode&limit=1`
     )
       .then(resp => resp.json())
       .then(c => {
@@ -128,7 +129,7 @@ function gettingSightingPosition(sightingObj) {
         sightingObj.city
       }%2C${
         sightingObj.state
-      }.json?country=us&limit=1&access_token=pk.eyJ1Ijoic2Vhbmx1Y2l1cyIsImEiOiJjanZudmVhZmQwZ3FqNDlxa2RvbDBtajRhIn0.vqWuEx7nomi_EhmWt948ZA&types=address`
+      }.json?country=us&limit=1&access_token=${MAPBOX_KEY}&types=address`
     )
       .then(resp => resp.json())
       .then(d => {
