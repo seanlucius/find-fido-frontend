@@ -15,6 +15,7 @@ import {
 const URL = "http://localhost:3000/lost_pets";
 const MAPBOX_KEY = `${process.env.REACT_APP_MAPBOX_KEY}`;
 
+// FETCHING LOST PETS FROM BACKEND
 function fetchingLostPets() {
   return dispatch => {
     dispatch(loadingPetSubmit());
