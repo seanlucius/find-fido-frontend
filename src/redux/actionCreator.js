@@ -114,6 +114,7 @@ function didNotFetch() {
   return { type: FAILED_FETCH };
 }
 
+// ALLOWS FOR STORE STATE TO BE RESET AFTER INVALID FORM SUBMISSION
 function resetFail() {
   return { type: RESET_FAIL };
 }
