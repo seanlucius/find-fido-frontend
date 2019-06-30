@@ -39,6 +39,7 @@ function loadingPetSubmit() {
   return { type: POST_LOADING };
 }
 
+// MAKING FETCH CALL TO MAPBOX GEOCODER API FOR COORDINATES
 function gettingLostPetPosition(petObj) {
   let splitAddress = petObj.street.split(" ");
   let streetNum = splitAddress.shift();
