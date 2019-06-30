@@ -64,6 +64,7 @@ function gettingLostPetPosition(petObj) {
   };
 }
 
+// VALID ADDRESS COORDINATES HAVE BEEN RETURNED FROM MAPBOX
 function submittingLostPetForm(petObj, coord) {
   let lat = coord[1];
   let long = coord[0];
