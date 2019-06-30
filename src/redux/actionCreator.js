@@ -109,6 +109,7 @@ function fetchedSearchCenter(coord) {
   return { type: FETCHED_MAP_CENTER, payload: coord };
 }
 
+// ACCOUNTS FOR INVALID ZIP/ADDRESS
 function didNotFetch() {
   return { type: FAILED_FETCH };
 }
