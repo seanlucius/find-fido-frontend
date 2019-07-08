@@ -106,6 +106,7 @@ function gettingSearchCenter(zip) {
   };
 }
 
+// VALID U.S. ZIP CODE COORDINATES RECEIVED FROM MAPBOX API, PAYLOARD IS NEW MAP CENTER
 function fetchedSearchCenter(coord) {
   return { type: FETCHED_MAP_CENTER, payload: coord };
 }
