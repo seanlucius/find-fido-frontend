@@ -90,6 +90,7 @@ function submittingLostPetForm(petObj, coord) {
   };
 }
 
+// ZIP CODE SUBMITTED TO MAPBOX GEOCODING API FOR SEARCH COORDINATES
 function gettingSearchCenter(zip) {
   return dispatch => {
     dispatch(loadingPetSubmit());
