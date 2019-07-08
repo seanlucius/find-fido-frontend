@@ -16,6 +16,7 @@ class LoginForm extends React.Component {
     password: ""
   };
 
+  // LOGIN FUNCTION DOES POST FETCH TO AUTH CONTROLLER ON BACKEND, SETS JWT IN LOCAL STORAGE IF SUCCESSFUL
   handleSubmit = e => {
     e.preventDefault();
     fetch("http://localhost:3000/login", {
