@@ -176,6 +176,8 @@ function submittedSighting(sightingObj) {
   return { type: POSTED_SIGHTING, payload: sightingObj };
 }
 
+// ON INITIAL PAGE LOAD, FETCHES SIGHTINGS FROM INTERNAL BACKEND
+
 function fetchingSightings() {
   return dispatch => {
     dispatch(loadingPetSubmit());
