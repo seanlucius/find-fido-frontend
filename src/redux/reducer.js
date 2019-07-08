@@ -60,6 +60,7 @@ const mapCenterReducer = (oldState = [38.90293, -77.037898], action) => {
   }
 };
 
+// REDUCER ACCOUNTS FOR FORM SUBMISSION FAILURES/RESETTING FORMS AFTER INVALID SUBMISSIONS
 const failedReducer = (oldState = false, action) => {
   switch (action.type) {
     case FAILED_FETCH:
